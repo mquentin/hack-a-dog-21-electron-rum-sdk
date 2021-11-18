@@ -29,9 +29,20 @@
 First, clone the repo via git and install dependencies:
 
 ```bash
-git clone --depth 1 --branch main https://github.com/electron-react-boilerplate/electron-react-boilerplate.git your-project-name
+git clone --depth 1 --branch main https://github.com/mquentin/hack-a-dog-21-electron-rum-sdk.git your-project-name
 cd your-project-name
 npm install
+```
+
+## Set up RUM
+
+create a `src/rum/token/token.ts` file (src/rum/token/is git ignored)
+
+```
+const rumToken = {
+  applicationId: 'my-app-id',
+  clientToken: 'my-token',
+};
 ```
 
 ## Starting Development

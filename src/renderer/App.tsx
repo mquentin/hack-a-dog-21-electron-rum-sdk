@@ -1,50 +1,40 @@
-import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
-import icon from '../../assets/icon.svg';
-import './App.css';
+import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
+import { datadogRum } from '@datadog/browser-rum';
 
-const Hello = () => {
-  return (
-    <div>
-      <div className="Hello">
-        <img width="200px" alt="icon" src={icon} />
-      </div>
-      <h1>electron-react-boilerplate</h1>
-      <div className="Hello">
-        <a
-          href="https://electron-react-boilerplate.js.org/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            Read our docs
-          </button>
-        </a>
-        <a
-          href="https://github.com/sponsors/electron-react-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              🙏
-            </span>
-            Donate
-          </button>
-        </a>
-      </div>
-    </div>
-  );
-};
+import Home from './Home';
+import Dashboard from './Dashboard';
+
+import rumToken from '../rum/token/token';
 
 export default function App() {
+  datadogRum.init({
+    applicationId: rumToken.applicationId,
+    clientToken: rumToken.clientToken,
+    site: 'datadoghq.com',
+    service: 'hack-a-dog-21-electron-rum',
+    // Specify a version number to identify the deployed version of your application in Datadog
+    // version: '1.0.0',
+    sampleRate: 100,
+    trackInteractions: true,
+    defaultPrivacyLevel: 'mask-user-input',
+  });
+
+  datadogRum.startSessionReplayRecording();
+
   return (
-    <Router>
+    <BrowserRouter>
+      <div className="menu">
+        <Link to="/">
+          <h2>Home</h2>
+        </Link>
+        <Link to="/dashboard">
+          <h2>Dashboard</h2>
+        </Link>
+      </div>
       <Switch>
-        <Route path="/" component={Hello} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/dashboard" component={Dashboard} />
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 }
