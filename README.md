@@ -36,7 +36,7 @@ npm install
 
 ## Set up RUM
 
-create a `src/rum/token/token.ts` file (src/rum/token/is git ignored)
+create a `src/rum/token/token.ts` file (`src/rum/token/is` git ignored)
 
 ```
 const rumToken = {

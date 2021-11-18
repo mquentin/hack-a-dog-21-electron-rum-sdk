@@ -1,40 +1,102 @@
 import { datadogRum } from '@datadog/browser-rum';
 
-import icon from '../../assets/icon.svg';
-import './App.css';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+
+import icon from '../../assets/icon.png';
 
 const Home = () => {
   return (
-    <div>
-      <div className="Hello">
-        <img width="200px" alt="icon" src={icon} />
-      </div>
-      <h1>electron-react-boilerplate</h1>
-      <div className="Hello">
-        <a
-          href="https://electron-react-boilerplate.js.org/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            Read our docs
-          </button>
-        </a>
-        <button
-          type="button"
-          onClick={() => {
-            console.log('Click Me!');
-            datadogRum.addAction('Click Me!', {
-              key: 'fou',
-            });
-          }}
-        >
-          Click Me!
-        </button>
-      </div>
+    <div style={{ width: '100vw', padding: '20px', display: 'flex' }}>
+      <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" src={icon} />
+        <Card.Body>
+          <Card.Title>Card Title</Card.Title>
+          <Card.Text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </Card.Text>
+          <Button
+            onClick={() => {
+              datadogRum.addAction(
+                'hack-a-dog-21-electron-rum-sdk : action 1',
+                {
+                  key: 'Home',
+                  name: 'action 1',
+                }
+              );
+            }}
+          >
+            Click Me (action 1)!
+          </Button>
+        </Card.Body>
+      </Card>
+
+      <Card style={{ width: '18rem', marginLeft: '20px' }}>
+        <Card.Img variant="top" src={icon} />
+        <Card.Body>
+          <Card.Title>Card Title</Card.Title>
+          <Card.Text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </Card.Text>
+          <Button
+            onClick={() => {
+              datadogRum.addAction(
+                'hack-a-dog-21-electron-rum-sdk : action 2',
+                {
+                  key: 'Home',
+                  name: 'action 2',
+                }
+              );
+            }}
+          >
+            Click Me (action 2)!
+          </Button>
+        </Card.Body>
+      </Card>
+
+      <Card style={{ width: '18rem', marginLeft: '20px' }}>
+        <Card.Img variant="top" src={icon} />
+        <Card.Body>
+          <Card.Title>Card Title</Card.Title>
+          <Card.Text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </Card.Text>
+          <Button
+            variant="danger"
+            onClick={() => {
+              throw new Error(
+                'hack-a-dog-21-electron-rum-sdk : Expected unhandled error'
+              );
+            }}
+          >
+            Click Me (throw Error )!
+          </Button>
+        </Card.Body>
+      </Card>
+
+      <Card style={{ width: '18rem', marginLeft: '20px' }}>
+        <Card.Img variant="top" src={icon} />
+        <Card.Body>
+          <Card.Title>Card Title</Card.Title>
+          <Card.Text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </Card.Text>
+          <Button
+            variant="warning"
+            onClick={() => {
+              const start = Date.now();
+              // block for 200ms
+              while (Date.now() - start < 200);
+            }}
+          >
+            Click Me (generate a long task)!
+          </Button>
+        </Card.Body>
+      </Card>
     </div>
   );
 };
